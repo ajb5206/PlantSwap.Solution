@@ -1,5 +1,5 @@
 */obj/
 */bin/
 */appsettings.json
-*.vscode/
+.vscode
 .DS_Store
