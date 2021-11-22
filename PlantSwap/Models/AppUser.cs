@@ -4,19 +4,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PlantSwap.Models
 {
-  public class User
+  public class AppUser
   {
-    public User()
+    public AppUser()
       {
         this.TradeJoinEntity = new HashSet<Trade>();
       }
 
-      public int UserId { get; set; }
+      public int AppUserId { get; set; }
 
       [DisplayName("User's Handle")]
-      public string UserHandle { get; set; }
+      public string AppUserHandle { get; set; }
       [DisplayName("User's Name")]
-      public string UsersName { get; set; }
+      public string AppUsersName { get; set; }
       [DisplayName("User's preferred contact information")]
       public string PreferredContact { get; set; }
       [Required]
