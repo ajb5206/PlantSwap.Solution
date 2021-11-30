@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Plant
+
+<h4>Add a new plant</h4>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.Genus)
+    @Html.TextBoxFor(model => model.Genus)
+
+    @Html.LabelFor(model => model.Species)
+    @Html.TextBoxFor(model => model.Species)
+    
+    <p>Common Name is required</p>
+    
+    @Html.LabelFor(model => model.CommonName)
+    @Html.TextBoxFor(model => model.CommonName)
+
+    @Html.LabelFor(model => model.Variety)
+    @Html.TextBoxFor(model => model.Variety)
+    <input type="submit" value="Add new plant" />
+}
