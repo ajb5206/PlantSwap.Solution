@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Plant;
+
+<h2>Plant Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h3>
+
+@if(@Model.TradeJoinEntity.Count == 0)
+{
+  <p>Trade opportunities are currently available in this plant.</p>
+}
+else
+{
+  <h4>Trade opportunties available for this plant:</h4>
+  <ul>
+  @foreach(var join in Model.TradeJoinEntity)
+  {
+    <li>@join.AppUser.AppUserHandle</li>
+//Need conditional if Offered, Wanted, Cutting, ImperfectMatch are true
+    <p>Listing date: @join.ListingDate</p>
+    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    @using (Html.BeginForm("DeleteAppUser", "Plants"))
+    {
+      @Html.Hidden("joinId", @join.TradeId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add an Trade", "AddTrade", new { id = Model.PlantId })</p>
+<p>@Html.ActionLink("Edit Plant", "Edit", new { id = Model.PlantId })</p>
+<p>@Html.ActionLink("Delete Plant", "Delete", new { id = Model.PlantId })</p>
+<p>@Html.ActionLink("Back to Plants", "Index")</p>
