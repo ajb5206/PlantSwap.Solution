@@ -1,8 +1,28 @@
 ﻿@{
+    Layout = "_Layout";
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@using PlantSwap.Models;
+@using System.Collections.Generic;
+@using System.Linq;
+
+<h1>Welcome to Plant Swap</h1>
+
+<hr />
+
+<h3>The Plants!</h3>
+
+@if (@Model["Plants"].Count == 0)
+{
+  <h4>No plants have been added yet!</h4>
+} 
+else
+{
+  <ul>
+    @foreach (Plant plant in @Model["Plants"])
+      {
+        <li>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</li>
+      }
+  </ul>  
+}
