@@ -1,0 +1,28 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Plant
+
+<h2>Edit</h2>
+
+<h4>Edit this plant: @Html.DisplayFor(model => model.CommonName)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PlantId)
+
+    @Html.LabelFor(model => model.Genus)
+    @Html.EditorFor(model => model.Genus)
+
+    @Html.LabelFor(model => model.Species)
+    @Html.EditorFor(model => model.Species)
+    
+    @Html.LabelFor(model => model.CommonName)
+    @Html.EditorFor(model => model.CommonName)
+
+    @Html.LabelFor(model => model.Variety)
+    @Html.EditorFor(model => model.Variety)
+
+    <input type="submit" value="Save" />
+}
