@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace PlantSwap.Models
 {
@@ -13,6 +14,7 @@ namespace PlantSwap.Models
 
     public string Genus { get; set; }
     public string Species { get; set; }
+    [Required]
     [DisplayName("Common Name")]
 
     public string CommonName { get; set; }
