@@ -9,7 +9,7 @@ namespace PlantSwap.Models
         public int OfferId { get; set; }
         public int TraderId { get; set; }
         public int PlantId { get; set; }
-        public bool Cutting { get; set; }
+        public bool IsCutting { get; set; }
         public DateTime ListingDate { get; set; }
         public List<Plant> WillAccept { get; set; }
         public bool ImperfectMatch { get; set; }
