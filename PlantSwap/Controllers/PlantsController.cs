@@ -91,6 +91,7 @@ namespace PlantSwap.Controllers
     {
       Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
       ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+      ViewBag.PlantId = new SelectList(_db.Plants, "ExchangeId,", "CommonName");
       return View(thisPlant);
     }
 
@@ -116,6 +117,7 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
+          //Need to add additional fields from the form to the database
           _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId });
         }
         _db.SaveChanges();
