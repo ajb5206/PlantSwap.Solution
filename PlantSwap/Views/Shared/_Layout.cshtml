@@ -21,9 +21,39 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Plants
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Plants" asp-action="Index">Plants Index</a>
+                        <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Plants" asp-action="Create">Create new plant</a>
+                      </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Traders
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Traders" asp-action="Index">Traders Index</a>
+                        <a class="dropdown-item" href="/Treats/Create">Create new trader</a>
+                      </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="/account" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        User Accounts
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register new account</a>
+                        <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                      </div>
+                      <a role="button" href="#">
+                        @using (Html.BeginForm("LogOff", "Account"))
+                        {
+                          <input type="submit" class="btn btn-default" value="Log out" />
+                        }
+                      </a>
+                    </li>
                     </ul>
                 </div>
             </div>
