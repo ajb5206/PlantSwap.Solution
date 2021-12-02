@@ -91,7 +91,7 @@ namespace PlantSwap.Controllers
     public ActionResult AddOffer(int id)
     {
       Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == id);
-      ViewBag.PlantId = new SelectList(_db.Plants, "PlantId,", "CommonName");
+      ViewBag.Plants = _db.Plants.ToList();
       return View(thisTrader);
     }
 

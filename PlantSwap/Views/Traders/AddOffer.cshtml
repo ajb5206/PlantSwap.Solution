@@ -15,7 +15,7 @@
   @Html.HiddenFor(model => model.TraderId)
 
   @Html.Label("Select plant")
-  @Html.DropDownList("PlantId")
+  @Html.DropDownList("PlantId", new SelectList(@ViewBag.Plants, "plantId", "CommonName"))
 
   @Html.Label("Is this a cutting?")
   @Html.CheckBox("isCutting", false)
