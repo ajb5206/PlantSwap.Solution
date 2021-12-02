@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlantSwap.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -96,7 +97,7 @@ namespace PlantSwap.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddOffer(Plant plant, int TraderId)
+    public ActionResult AddOffer(Plant plant, int TraderId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
     {
       if (TraderId != 0)
       {
@@ -118,7 +119,8 @@ namespace PlantSwap.Controllers
         if (isUnique)
         {
           //Need to add additional fields from the form to the database
-          _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId });
+          List<int> willAcceptList = new List<int> { ExchangeId };
+          _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, WillAccept = willAcceptList, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
