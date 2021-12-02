@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Trader
+
+<h4>Add a new trader</h4>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@using (Html.BeginForm())
+{
+    @Html.LabelFor(model => model.TraderHandle)
+    @Html.TextBoxFor(model => model.TraderHandle)
+
+    @Html.LabelFor(model => model.TraderName)
+    @Html.TextBoxFor(model => model.TraderName)
+    
+    <p>Common Name is required</p>
+    
+    @Html.LabelFor(model => model.PreferredContact)
+    @Html.TextBoxFor(model => model.PreferredContact)
+
+    @Html.LabelFor(model => model.ZipCode)
+    @Html.TextBoxFor(model => model.ZipCode)
+    <input type="submit" value="Add new trader" />
+}
