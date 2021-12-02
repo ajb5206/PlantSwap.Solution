@@ -118,9 +118,7 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
-          //Need to add additional fields from the form to the database
-          List<int> willAcceptList = new List<int> { ExchangeId };
-          _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, WillAccept = willAcceptList, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
@@ -157,8 +155,7 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
-          List<int> haveToOfferList = new List<int> { ExchangeId };
-          _db.Requests.Add(new Request() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, HaveToOffer = haveToOfferList, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Requests.Add(new Request() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
