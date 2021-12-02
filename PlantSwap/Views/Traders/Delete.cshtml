@@ -1,0 +1,13 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Trader
+
+<h2>Are you sure you want to delete @Html.DisplayFor(model => model.TraderHandle)?</h2>
+
+@Html.DisplayNameFor(model => model.TraderHandle): @Html.DisplayFor(model => model.TraderHandle)
+@using (Html.BeginForm())
+{
+    <input type="submit" value="Delete" />
+}
