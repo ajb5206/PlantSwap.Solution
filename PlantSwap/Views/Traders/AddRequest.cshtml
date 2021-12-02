@@ -2,20 +2,20 @@
   Layout = "_Layout";
 }
 
-@model PlantSwap.Models.Trader
+@model PlantSwap.Models.Plant
 
-<h2>Add an offer</h2>
+<h2>Add a request</h2>
 
-<h4>Add an offer from @Html.DisplayFor(model => model.TraderHandle)</h4>
+<h4>Add a request to @Html.DisplayFor(model => model.CommonName)</h4>
 
 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
 @using (Html.BeginForm())
 {
-  @Html.HiddenFor(model => model.TraderId)
+  @Html.HiddenFor(model => model.PlantId)
 
-  @Html.Label("Select plant")
-  @Html.DropDownList("PlantId")
+  @Html.Label("Select trader")
+  @Html.DropDownList("TraderId")
 
   @Html.Label("Is this a cutting?")
   @Html.CheckBox("isCutting", false)
@@ -23,7 +23,7 @@
 	@Html.Label("Listing Date")
 	@Html.TextBox("listingDate")
 
-	@Html.Label("What plant will you accept for this?")
+	@Html.Label("What plant would you trade for this?")
 	@Html.DropDownList("ExchangeId")
 
 	@Html.Label("Would you accept an imperfect match?")
