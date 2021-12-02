@@ -1,0 +1,38 @@
+{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Plant
+
+<h2>Add a request</h2>
+
+<h4>Add a request to @Html.DisplayFor(model => model.CommonName)</h4>
+
+@Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.PlantId)
+
+  @Html.Label("Select trader")
+  @Html.DropDownList("TraderId")
+
+  @Html.Label("Is this a cutting?")
+  @Html.CheckBox("isCutting", false)
+
+	@Html.Label("Listing Date")
+	@Html.TextBox("listingDate")
+
+	@Html.Label("What plant would you trade for this?")
+	@Html.DropDownList("ExchangeId")
+
+	@Html.Label("Would you accept an imperfect match?")
+	@Html.CheckBox("imperfectMatch", false)
+
+	@Html.Label("What is the max distance you are willing to travel?")
+	@Html.TextBox("maxDistance")
+
+  <input type="submit" value="Save" />
+}
+
+<p>@Html.ActionLink("Create new plant", "Create", "Plants")</p>
