@@ -8,7 +8,8 @@ namespace PlantSwap.Models
   {
     public Plant()
     {
-      this.TradeJoinEntity = new HashSet<Trade>();
+      this.OfferJoinEntity = new HashSet<Offer>();
+      this.RequestJoinEntity = new HashSet<Request>();
     }
     public int PlantId { get; set; }
 
@@ -19,6 +20,7 @@ namespace PlantSwap.Models
 
     public string CommonName { get; set; }
     public string Variety { get; set; }
-    public virtual ICollection<Trade> TradeJoinEntity { get;}
+    public virtual ICollection<Offer> OfferJoinEntity { get;}
+    public virtual ICollection<Request> RequestJoinEntity { get; }
   }
 }

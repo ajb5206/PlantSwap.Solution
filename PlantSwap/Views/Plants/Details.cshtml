@@ -8,30 +8,54 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h3>
 
-@if(@Model.TradeJoinEntity.Count == 0)
+@if(@Model.OfferJoinEntity.Count == 0)
 {
-  <p>Trade opportunities are currently available in this plant.</p>
+  <p>No offers of this plant are currently available.</p>
 }
 else
 {
-  <h4>Trade opportunties available for this plant:</h4>
+  <h4>Offers available for this plant:</h4>
   <ul>
-  @foreach(var join in Model.TradeJoinEntity)
+  @foreach(var join in Model.OfferJoinEntity)
   {
-    <li>@join.AppUser.AppUserHandle</li>
-//Need conditional if Offered, Wanted, Cutting, ImperfectMatch are true
+    <li>@join.Trader.TraderHandle</li>
+//Need conditional if Cutting, ImperfectMatch are true
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum distance in miles for trading: @join.MaxDistance</p>
-    @using (Html.BeginForm("DeleteAppUser", "Plants"))
+    @using (Html.BeginForm("DeleteTrader", "Plants"))
     {
-      @Html.Hidden("joinId", @join.TradeId)
+      @Html.Hidden("joinId", @join.OfferId)
       <input type="submit" value="Delete"/>
     }
   }
   </ul>
 }
 
-<p>@Html.ActionLink("Add an Trade", "AddTrade", new { id = Model.PlantId })</p>
+@if(@Model.RequestJoinEntity.Count == 0)
+{
+  <p>No requests are currently made for this plant.</p>
+}
+else
+{
+  <h4>Requests for this plant:</h4>
+  <ul>
+  @foreach(var join in Model.RequestJoinEntity)
+  {
+    <li>@join.Trader.TraderHandle</li>
+//Need conditional if Cutting, ImperfectMatch are true
+    <p>Listing date: @join.ListingDate</p>
+    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    @using (Html.BeginForm("DeleteTrader", "Plants"))
+    {
+      @Html.Hidden("joinId", @join.RequestId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.PlantId })</p>
+<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.PlantId })</p>
 <p>@Html.ActionLink("Edit Plant", "Edit", new { id = Model.PlantId })</p>
 <p>@Html.ActionLink("Delete Plant", "Delete", new { id = Model.PlantId })</p>
 <p>@Html.ActionLink("Back to Plants", "Index")</p>

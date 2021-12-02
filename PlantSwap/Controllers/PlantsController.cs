@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PlantSwap.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,7 +18,7 @@ namespace PlantSwap.Controllers
 
     public PlantsController(UserManager<ApplicationUser> userManager, PlantSwapContext db)
     {
-       _userManager = userManager;
+      _userManager = userManager;
       _db = db;
     }
 
@@ -58,8 +59,10 @@ namespace PlantSwap.Controllers
     public ActionResult Details(int id)
     {
       Plant thisPlant = _db.Plants
-          .Include(plant => plant.TradeJoinEntity)
-          .ThenInclude(join => join.AppUser)
+          .Include(plant => plant.OfferJoinEntity)
+          .ThenInclude(join => join.Trader)
+          .Include(plant => plant.RequestJoinEntity)
+          .ThenInclude(join => join.Trader)
           .FirstOrDefault(plant => plant.PlantId == id);
       return View(thisPlant);
     }
@@ -68,60 +71,97 @@ namespace PlantSwap.Controllers
     public ActionResult Edit(int id)
     {
       Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
-      ViewBag.AppUserId = new SelectList(_db.AppUsers, "AppUserId", "AppUserName");
+      ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
       return View(thisPlant);
     }
 
     [HttpPost]
-    public ActionResult Edit(Plant plant, int AppUserId)
+    public ActionResult Edit(Plant plant, int TraderId)
     {
-      if (AppUserId != 0)
+      if (TraderId != 0)
       {
-        _db.Trades.Add(new Trade() { AppUserId = AppUserId, PlantId = plant.PlantId });
+        _db.Offers.Add(new Offer() {TraderId = TraderId, PlantId = plant.PlantId});
+        _db.Requests.Add(new Request() { TraderId = TraderId, PlantId = plant.PlantId });
       }
       _db.Entry(plant).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
-//Needed Functionality: Create both sides of a trade: an Offer & a Request
-    // public ActionResult AddAppUser(int id)
-    // {
-    //   Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
-    //   ViewBag.AppUserId = new SelectList(_db.AppUsers, "AppUserId", "AppUserName");
-    //   return View(thisPlant);
-    // }
+    public ActionResult AddOffer(int id)
+    {
+      Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
+      ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+      ViewBag.PlantId = new SelectList(_db.Plants, "ExchangeId,", "CommonName");
+      return View(thisPlant);
+    }
 
-    // [HttpPost]
-    // public ActionResult AddAppUser(Plant plant, int AppUserId)
-    // {
-    //   if (AppUserId != 0)
-    //   {
-    //     ViewBag.ErrorMessage = "";
-    //     bool isUnique = true;
-    //     List<Trade> appUserPlantList = _db.Trade.ToList();
-    //     foreach(Trade iteration in appUserPlantList)
-    //     {
-    //       if (plant.PlantId == iteration.PlantId && AppUserId == iteration.AppUserId) 
-    //       {
-    //         isUnique = false;
-    //         AppUser thisAppUser = _db.AppUsers.FirstOrDefault(appUser => appUser.AppUserId == AppUserId);
-    //         ModelState.AddModelError("DuplicateAppUser", "This plant is already licensed to repair " + thisAppUser.AppUserName);
-    //         Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == AppUserId);
-    //         ViewBag.AppUserId = new SelectList(_db.AppUsers, "AppUserId", "AppUserName");
-    //         return View(thisPlant);
-    //       }
-    //     }
-    //     if (isUnique)
-    //     {
-    //       _db.Trade.Add(new Trade() { AppUserId = AppUserId, PlantId = plant.PlantId });
-    //     }
-    //     _db.SaveChanges();
-    //   }
-    //   return RedirectToAction("Index");
-    // }
+    [HttpPost]
+    public ActionResult AddOffer(Plant plant, int TraderId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
+    {
+      if (TraderId != 0)
+      {
+        ViewBag.ErrorMessage = "";
+        bool isUnique = true;
+        List<Offer> offerList = _db.Offers.ToList();
+        foreach(Offer iteration in offerList)
+        {
+          if (plant.PlantId == iteration.PlantId && TraderId == iteration.TraderId) 
+          {
+            isUnique = false;
+            Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == TraderId);
+            ModelState.AddModelError("DuplicateTrader", "This plant is already offered by " + thisTrader.TraderName);
+            Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == TraderId);
+            ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+            return View(thisPlant);
+          }
+        }
+        if (isUnique)
+        {
+          _db.Offers.Add(new Offer() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+        }
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
 
-//Add User Authorization
+    public ActionResult AddRequest(int id)
+    {
+      Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
+      ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+      ViewBag.PlantId = new SelectList(_db.Plants, "ExchangeId,", "CommonName");
+      return View(thisPlant);
+    }
+
+    [HttpPost]
+    public ActionResult AddRequest(Plant plant, int TraderId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
+    {
+      if (TraderId != 0)
+      {
+        ViewBag.ErrorMessage = "";
+        bool isUnique = true;
+        List<Request> requestList = _db.Requests.ToList();
+        foreach(Request iteration in requestList)
+        {
+          if (plant.PlantId == iteration.PlantId && TraderId == iteration.TraderId) 
+          {
+            isUnique = false;
+            Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == TraderId);
+            ModelState.AddModelError("DuplicateTrader", "This plant is already requested by " + thisTrader.TraderName);
+            Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == TraderId);
+            ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+            return View(thisPlant);
+          }
+        }
+        if (isUnique)
+        {
+          _db.Requests.Add(new Request() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+        }
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Index");
+    }
+
     public ActionResult Delete(int id)
     {
       Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
@@ -137,14 +177,23 @@ namespace PlantSwap.Controllers
       return RedirectToAction("Index");
     }
 
-//Needed Functionality: Delete your offers & requests WITH User Authorization
-    // [HttpPost]
-    // public ActionResult DeleteAppUser(int joinId)
-    // {
-    //   Trade joinEntry = _db.Trade.FirstOrDefault(entry => entry.TradeId == joinId);
-    //   _db.Trade.Remove(joinEntry);
-    //   _db.SaveChanges();
-    //   return RedirectToAction("Index");
-    // }
+    //Add User Authorization
+    [HttpPost]
+    public ActionResult DeleteOffer(int joinId)
+    {
+      Offer joinEntry = _db.Offers.FirstOrDefault(entry => entry.OfferId == joinId);
+      _db.Offers.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
+  
+    [HttpPost]
+    public ActionResult DeleteRequest(int joinId)
+    {
+      Request joinEntry = _db.Requests.FirstOrDefault(entry => entry.RequestId == joinId);
+      _db.Requests.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
