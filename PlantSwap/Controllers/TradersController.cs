@@ -96,28 +96,28 @@ namespace PlantSwap.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddOffer(Trader trader, int PlantOfferedId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
+    public ActionResult AddOffer(Trader trader, int plantOfferedId, bool isCutting, DateTime listingDate, int exchangeId, bool imperfectMatch, int maxDistance)
     {
-      if (PlantOfferedId != 0)
+      if (plantOfferedId != 0)
       {
         ViewBag.ErrorMessage = "";
         bool isUnique = true;
         List<Offer> offerList = _db.Offers.ToList();
         foreach(Offer iteration in offerList)
         {
-          if (trader.TraderId == iteration.TraderId && PlantOfferedId == iteration.PlantId) 
+          if (trader.TraderId == iteration.TraderId && plantOfferedId == iteration.PlantId) 
           {
             isUnique = false;
-            Plant thisPlant = _db.Plants.FirstOrDefault( plant => plant.PlantId == PlantOfferedId);
+            Plant thisPlant = _db.Plants.FirstOrDefault( plant => plant.PlantId == plantOfferedId);
             ModelState.AddModelError("DuplicatePlant", "This trader is already offering " + thisPlant.CommonName);
-            Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == PlantOfferedId);
-            ViewBag.PlantId = new SelectList(_db.Plants, "PlantId", "CommonName");
+            Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == plantOfferedId);
+            ViewBag.Plants = _db.Plants.ToList();
             return View(thisTrader);
           }
         }
         if (isUnique)
         {
-          _db.Offers.Add(new Offer() { PlantId = PlantOfferedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Offers.Add(new Offer() { PlantId = plantOfferedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
@@ -127,33 +127,33 @@ namespace PlantSwap.Controllers
     public ActionResult AddRequest(int id)
     {
       Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == id);
-      ViewBag.PlantId = new SelectList(_db.Plants, "PlantId,", "CommonName");
+      ViewBag.Plants = _db.Plants.ToList();
       return View(thisTrader);
     }
 
     [HttpPost]
-    public ActionResult AddRequest(Trader trader, int PlantRequestedId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
+    public ActionResult AddRequest(Trader trader, int plantRequestedId, bool isCutting, DateTime listingDate, int exchangeId, bool imperfectMatch, int maxDistance)
     {
-      if (PlantRequestedId != 0)
+      if (plantRequestedId != 0)
       {
         ViewBag.ErrorMessage = "";
         bool isUnique = true;
         List<Request> requestList = _db.Requests.ToList();
         foreach(Request iteration in requestList)
         {
-          if (trader.TraderId == iteration.TraderId && PlantRequestedId == iteration.PlantId) 
+          if (trader.TraderId == iteration.TraderId && plantRequestedId == iteration.PlantId) 
           {
             isUnique = false;
-            Plant thisPlant = _db.Plants.FirstOrDefault( plant => plant.PlantId == PlantRequestedId);
+            Plant thisPlant = _db.Plants.FirstOrDefault( plant => plant.PlantId == plantRequestedId);
             ModelState.AddModelError("DuplicatePlant", "This trader has already requested " + thisPlant.CommonName);
-            Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == PlantRequestedId);
-            ViewBag.PlantId = new SelectList(_db.Plants, "PlantId", "CommonName");
+            Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == plantRequestedId);
+            ViewBag.Plants = _db.Plants.ToList();
             return View(thisTrader);
           }
         }
         if (isUnique)
         {
-          _db.Requests.Add(new Request() { PlantId = PlantRequestedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Requests.Add(new Request() { PlantId = plantRequestedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
