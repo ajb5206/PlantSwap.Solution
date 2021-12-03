@@ -1,4 +1,4 @@
-{
+@{
   Layout = "_Layout";
 }
 
@@ -15,7 +15,7 @@
   @Html.HiddenFor(model => model.TraderId)
 
   @Html.Label("Select plant")
-  @Html.DropDownList("PlantId", new SelectList(@ViewBag.Plants, "plantId", "CommonName"))
+  @Html.DropDownList("plantOfferedId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"))
 
   @Html.Label("Is this a cutting?")
   @Html.CheckBox("isCutting", false)
@@ -24,7 +24,7 @@
 	@Html.TextBox("listingDate")
 
 	@Html.Label("What plant will you accept for this?")
-	@Html.DropDownList("ExchangeId")
+	@Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"))
 
 	@Html.Label("Would you accept an imperfect match?")
 	@Html.CheckBox("imperfectMatch", false)
