@@ -25,7 +25,7 @@ else
 //Need conditional if Cutting, ImperfectMatch are true
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum distance in miles for trading: @join.MaxDistance</p>
-    @using (Html.BeginForm("DeleteTrader", "Plants"))
+    @using (Html.BeginForm("DeleteOffer", "Plants"))
     {
       @Html.Hidden("joinId", @join.OfferId)
       <input type="submit" value="Delete"/>
@@ -48,7 +48,7 @@ else
 //Need conditional if Cutting, ImperfectMatch are true
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum distance in miles for trading: @join.MaxDistance</p>
-    @using (Html.BeginForm("DeleteTrader", "Plants"))
+    @using (Html.BeginForm("DeleteRequest", "Plants"))
     {
       @Html.Hidden("joinId", @join.RequestId)
       <input type="submit" value="Delete"/>
