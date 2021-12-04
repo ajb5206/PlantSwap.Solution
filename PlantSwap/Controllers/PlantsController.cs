@@ -135,21 +135,21 @@ namespace PlantSwap.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddRequest(Plant plant, int TraderId, bool isCutting, DateTime listingDate, int ExchangeId, bool imperfectMatch, int maxDistance)
+    public ActionResult AddRequest(Plant plant, int traderId, bool isCutting, DateTime listingDate, int exchangeId, bool imperfectMatch, int maxDistance)
     {
-      if (TraderId != 0)
+      if (traderId != 0)
       {
         ViewBag.ErrorMessage = "";
         bool isUnique = true;
         List<Request> requestList = _db.Requests.ToList();
         foreach(Request iteration in requestList)
         {
-          if (plant.PlantId == iteration.PlantId && TraderId == iteration.TraderId) 
+          if (plant.PlantId == iteration.PlantId && traderId == iteration.TraderId) 
           {
             isUnique = false;
-            Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == TraderId);
+            Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == traderId);
             ModelState.AddModelError("DuplicateTrader", "This plant is already requested by " + thisTrader.TraderName);
-            Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == TraderId);
+            Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == traderId);
             ViewBag.Traders = _db.Traders.ToList();
             ViewBag.Plants = _db.Plants.ToList();
             return View(thisPlant);
@@ -157,7 +157,7 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
-          _db.Requests.Add(new Request() { TraderId = TraderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = ExchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Requests.Add(new Request() { TraderId = traderId, PlantId = plant.PlantId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
