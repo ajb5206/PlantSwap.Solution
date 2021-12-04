@@ -112,7 +112,8 @@ namespace PlantSwap.Controllers
             Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == TraderId);
             ModelState.AddModelError("DuplicateTrader", "This plant is already offered by " + thisTrader.TraderName);
             Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == TraderId);
-            ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+            ViewBag.Traders = _db.Traders.ToList();
+            ViewBag.Plants = _db.Plants.ToList();
             return View(thisPlant);
           }
         }
@@ -128,8 +129,8 @@ namespace PlantSwap.Controllers
     public ActionResult AddRequest(int id)
     {
       Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
-      ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
-      ViewBag.PlantId = new SelectList(_db.Plants, "ExchangeId,", "CommonName");
+      ViewBag.Traders = _db.Traders.ToList();
+      ViewBag.Plants = _db.Plants.ToList();
       return View(thisPlant);
     }
 
@@ -149,7 +150,8 @@ namespace PlantSwap.Controllers
             Trader thisTrader = _db.Traders.FirstOrDefault( trader => trader.TraderId == TraderId);
             ModelState.AddModelError("DuplicateTrader", "This plant is already requested by " + thisTrader.TraderName);
             Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == TraderId);
-            ViewBag.TraderId = new SelectList(_db.Traders, "TraderId", "TraderName");
+            ViewBag.Traders = _db.Traders.ToList();
+            ViewBag.Plants = _db.Plants.ToList();
             return View(thisPlant);
           }
         }
