@@ -153,7 +153,8 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
-          _db.Requests.Add(new Request() { PlantId = plantRequestedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Requests.Add(new Request() { PlantId = plantRequestedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, HaveToOfferPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance }
+          );
         }
         _db.SaveChanges();
       }
