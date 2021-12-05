@@ -18,6 +18,15 @@ a {
   border-color: #1861ac;
 }
 
+.btn-default {
+  border: black dotted 2px;
+}
+
+.btn-logout {
+  border: none;
+  margin-left: 12px;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
@@ -61,7 +70,11 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
+  background-image: url(/PlantSwap/wwwroot/images/PlantSwap.jpg);
+  background-repeat:no-repeat;
+  background-attachment:fixed;
 }
+
 .footer {
   position: absolute;
   bottom: 0;
