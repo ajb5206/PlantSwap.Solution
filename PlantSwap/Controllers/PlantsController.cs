@@ -56,14 +56,29 @@ namespace PlantSwap.Controllers
       return RedirectToAction("Index");
     }
 
+    //The id passed into the Details action method comes from the Razor Action Link on line 17 of Views/Plants/Index (or line 25 of Views/Home/Index). That action link is inside a loop through the Index's model so it is only interacting with a single plant at a time (the plant of that iteration). The action link grabs the id from the iteration of the Index's model.
     public ActionResult Details(int id)
     {
+      //Gives a list of Plant objects from the database (but not its associated offers or requests)
       Plant thisPlant = _db.Plants
+          //Loads the OfferJoinEntity property of each Plant (this is just a collection of join entities, not the actual Trader or reciprocal plants)
           .Include(plant => plant.OfferJoinEntity)
+          //Loads the Trader (not just the ID but the actual Trader object) of each OfferJoinEntity
           .ThenInclude(join => join.Trader)
+          //Loads the RequestJoinEntity property of each Plant (this is just a collection of join entities, not the actual Trader or reciprocal plants)
           .Include(plant => plant.RequestJoinEntity)
+          //Loads the Trader (not just the ID but the actual Trader object) of each RequestJoinEntity
           .ThenInclude(join => join.Trader)
+          //Specifies which Plant from the database we're working with (i.e. for which plant we're displaying the details)
           .FirstOrDefault(plant => plant.PlantId == id);
+
+
+        //Experiment that doesn't yet work
+        Plant PlantsWillAcceptForAnOffer = _db.Plants
+          .Include(plant => plant.OfferJoinEntity)
+          //.Any(plant => plant.CommonName == WillAcceptPlantId);
+          .Any(plant => plant.PlantId == OfferJoinEntity.WillAcceptPlantId);
+          
       return View(thisPlant);
     }
 
