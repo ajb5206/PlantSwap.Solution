@@ -1,0 +1,65 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Trader;
+
+<h2>Trader Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.TraderHandle): @Html.DisplayFor(model => model.TraderHandle)</h3>
+<h3>@Html.DisplayNameFor(model => model.TraderName): @Html.DisplayFor(model => model.TraderName)</h3>
+<h3>@Html.DisplayNameFor(model => model.PreferredContact): @Html.DisplayFor(model => model.PreferredContact)</h3>
+<h3>@Html.DisplayNameFor(model => model.ZipCode): @Html.DisplayFor(model => model.ZipCode)</h3>
+
+
+@if(@Model.OfferJoinEntity.Count == 0)
+{
+  <p>This trader has not currently made any offers.</p>
+}
+else
+{
+  <h4>Offers this trader has made:</h4>
+  <ul>
+  @foreach(var join in Model.OfferJoinEntity)
+  {
+    <li>@join.Plant.CommonName</li>
+//Need conditional if Cutting, ImperfectMatch are true
+    <p>Listing date: @join.ListingDate</p>
+    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    @using (Html.BeginForm("DeleteOffer", "Traders"))
+    {
+      @Html.Hidden("joinId", @join.OfferId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+@if(@Model.RequestJoinEntity.Count == 0)
+{
+  <p>This trader has not made any requests.</p>
+}
+else
+{
+  <h4>Requests this trader has made:</h4>
+  <ul>
+  @foreach(var join in Model.RequestJoinEntity)
+  {
+    <li>@join.Plant.CommonName</li>
+//Need conditional if Cutting, ImperfectMatch are true
+    <p>Listing date: @join.ListingDate</p>
+    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    @using (Html.BeginForm("DeleteRequest", "Traders"))
+    {
+      @Html.Hidden("joinId", @join.RequestId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+}
+
+<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.TraderId })</p>
+<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.TraderId })</p>
+<p>@Html.ActionLink("Edit Trader", "Edit", new { id = Model.TraderId })</p>
+<p>@Html.ActionLink("Delete Trader", "Delete", new { id = Model.TraderId })</p>
+<p>@Html.ActionLink("Back to Traders", "Index")</p>

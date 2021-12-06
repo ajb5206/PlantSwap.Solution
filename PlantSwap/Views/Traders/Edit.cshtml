@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+@model PlantSwap.Models.Trader
+
+<h2>Edit</h2>
+
+<h4>Edit this trader: @Html.DisplayFor(model => model.TraderHandle)</h4>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.TraderId)
+
+    @Html.LabelFor(model => model.TraderHandle)
+    @Html.EditorFor(model => model.TraderHandle, new { @class = "form" })
+    <br>
+    @Html.LabelFor(model => model.TraderName)
+    @Html.EditorFor(model => model.TraderName, new { @class = "form" })
+    
+    <p>Common Name is required</p>
+    <br>
+    @Html.LabelFor(model => model.PreferredContact)
+    @Html.EditorFor(model => model.PreferredContact, new { @class = "form" })
+    <br>
+    @Html.LabelFor(model => model.ZipCode)
+    @Html.EditorFor(model => model.ZipCode, new { @class = "form" })
+    <br>
+    <input type="submit" value="Save" />
+}
+
+    

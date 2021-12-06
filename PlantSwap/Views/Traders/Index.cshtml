@@ -1,0 +1,20 @@
+@{
+  Layout = "_Layout";
+}
+
+@using PlantSwap.Models;
+@model List<PlantSwap.Models.Trader>;
+
+<h1>Traders</h1>
+
+@if (@Model.Count == 0)
+{
+  <h3>No traders have been added yet!</h3>
+} 
+
+@foreach (Trader trader in Model)
+{
+  <li>@Html.ActionLink($"{trader.TraderHandle}", "Details", new { id = trader.TraderId })</li>
+}
+
+<p>@Html.ActionLink("Add new trader", "Create")</p>

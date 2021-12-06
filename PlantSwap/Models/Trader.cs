@@ -13,12 +13,15 @@ namespace PlantSwap.Models
       }
 
       public int TraderId { get; set; }
+      [Required]
 
       [DisplayName("Trader's Handle")]
       public string TraderHandle { get; set; }
+      [Required]
       [DisplayName("Trader's Name")]
       public string TraderName { get; set; }
-      [DisplayName("Trader's preferred contact information")]
+      [Required]
+      [DisplayName("Trader's preferred contact information (e.g. Phone number or email address)")]
       public string PreferredContact { get; set; }
       [Required]
       [DisplayName("Trader's Zip Code")]
