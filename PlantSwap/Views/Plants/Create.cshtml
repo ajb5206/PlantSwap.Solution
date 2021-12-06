@@ -12,16 +12,15 @@
 {
     @Html.LabelFor(model => model.Genus)
     @Html.TextBoxFor(model => model.Genus)
-
+    <br>
     @Html.LabelFor(model => model.Species)
     @Html.TextBoxFor(model => model.Species)
-    
-    <p>Common Name is required</p>
-    
+    <p><i>Common Name is required</i></p>
     @Html.LabelFor(model => model.CommonName)
     @Html.TextBoxFor(model => model.CommonName)
-
+    <br>
     @Html.LabelFor(model => model.Variety)
     @Html.TextBoxFor(model => model.Variety)
+    <br>
     <input type="submit" value="Add new plant" />
 }

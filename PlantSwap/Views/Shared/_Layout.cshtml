@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -46,12 +48,15 @@
                       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register new account</a>
                         <a class="dropdown-item" class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+                        <form method = "post" asp-controller="Account" asp-action="LogOff">
+                              <input type = "submit" class="btn btn-logout" value = "Log Out"/>
+                        </form>  
                       </div>
-                      <a role="button" href="#">
-                        @using (Html.BeginForm("LogOff", "Account"))
-                        {
-                          <input type="submit" class="btn btn-default" value="Log out" />
-                        }
+                      <li class="nav-item">
+                            <form method = "post" asp-controller="Account" asp-action="LogOff">
+                              <input type = "submit" class="btn btn-logout" value = "Log Out"/>
+                            </form>    
+                      </li>
                       </a>
                     </li>
                     </ul>
