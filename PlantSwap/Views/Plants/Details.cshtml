@@ -6,25 +6,37 @@
 
 <h2>Plant Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h3>
-<h3>@Html.DisplayNameFor(model => model.Genus): @Html.DisplayFor(model => model.Genus)</h3>
-<h3>@Html.DisplayNameFor(model => model.Species): @Html.DisplayFor(model => model.Species)</h3>
-<h3>@Html.DisplayNameFor(model => model.Variety): @Html.DisplayFor(model => model.Variety)</h3>
+<h4>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h4>
+<h4>@Html.DisplayNameFor(model => model.Genus): @Html.DisplayFor(model => model.Genus)</h4>
+<h4>@Html.DisplayNameFor(model => model.Species): @Html.DisplayFor(model => model.Species)</h4>
+<h4>@Html.DisplayNameFor(model => model.Variety): @Html.DisplayFor(model => model.Variety)</h4>
+<hr />
 
 @if(@Model.OfferJoinEntity.Count == 0)
 {
-  <p>No offers of this plant are currently available.</p>
+  <h4>No offers of @Html.DisplayFor(model => model.CommonName) are currently available.</h4>
 }
 else
 {
-  <h4>Offers available for this plant:</h4>
+  <h4>Offers available for @Html.DisplayFor(model => model.CommonName)</h4>
   <ul>
   @foreach(var join in Model.OfferJoinEntity)
   {
-    <li>@join.Trader.TraderHandle</li>
-//Need conditional if Cutting, ImperfectMatch are true
+    <h5>In exchange for: the plant with ID #@join.WillAcceptPlantId.</h5>
+    <p>From: @join.Trader.TraderHandle</p>
+
+    if(@join.IsCutting == true)
+    {
+      <p>This offer is a cutting</p>
+    }
+
+    if(@join.ImperfectMatch == true)
+    {
+      <p>@join.Trader.TraderHandle *will* consider other plants in exchange for their @Html.DisplayFor(model => model.CommonName)</p>
+    }
+
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    <p>Maximum miles for this offer: @join.MaxDistance</p>
     @using (Html.BeginForm("DeleteOffer", "Plants"))
     {
       @Html.Hidden("joinId", @join.OfferId)
@@ -33,21 +45,32 @@ else
   }
   </ul>
 }
+<hr />
 
 @if(@Model.RequestJoinEntity.Count == 0)
 {
-  <p>No requests are currently made for this plant.</p>
+  <h4>No requests are currently made for @Html.DisplayFor(model => model.CommonName).</h4>
 }
 else
 {
-  <h4>Requests for this plant:</h4>
+  <h4>Requests for @Html.DisplayFor(model => model.CommonName):</h4>
   <ul>
   @foreach(var join in Model.RequestJoinEntity)
   {
-    <li>@join.Trader.TraderHandle</li>
-//Need conditional if Cutting, ImperfectMatch are true
+    <h5>In exchange for: the plant with ID #@join.HaveToOfferPlantId.</h5>
+    <li>From: @join.Trader.TraderHandle</li>
+
+    if(@join.IsCutting == true)
+    {
+      <p>This offer is a cutting</p>
+    }
+
+    if(@join.ImperfectMatch == true)
+    {
+      <p>@join.Trader.TraderHandle *will* consider other plants in exchange for the plant with ID #@join.HaveToOfferPlantId</p>
+    }
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    <p>Maximum miles for this offer: @join.MaxDistance</p>
     @using (Html.BeginForm("DeleteRequest", "Plants"))
     {
       @Html.Hidden("joinId", @join.RequestId)
