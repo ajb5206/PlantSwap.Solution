@@ -74,6 +74,10 @@ body {
   background-repeat:no-repeat;
 }
 
+.form {
+  margin-left: 10px;
+}
+
 .footer {
   position: absolute;
   bottom: 0;
