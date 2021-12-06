@@ -21,7 +21,7 @@ namespace PlantSwap.Models
       [DisplayName("Trader's Name")]
       public string TraderName { get; set; }
       [Required]
-      [DisplayName("Trader's preferred contact information (e.g. Phone number or email address")]
+      [DisplayName("Trader's preferred contact information (e.g. Phone number or email address)")]
       public string PreferredContact { get; set; }
       [Required]
       [DisplayName("Trader's Zip Code")]

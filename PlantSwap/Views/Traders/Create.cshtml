@@ -11,17 +11,16 @@
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.TraderHandle)
-    @Html.TextBoxFor(model => model.TraderHandle)
-
+    @Html.TextBoxFor(model => model.TraderHandle, new { @class = "form" })
+    <br>
     @Html.LabelFor(model => model.TraderName)
-    @Html.TextBoxFor(model => model.TraderName)
-    
-    <p>Common Name is required</p>
-    
+    @Html.TextBoxFor(model => model.TraderName, new { @class = "form" })
+    <br>
     @Html.LabelFor(model => model.PreferredContact)
-    @Html.TextBoxFor(model => model.PreferredContact)
-
+    @Html.TextBoxFor(model => model.PreferredContact, new { @class = "form" })
+    <br>
     @Html.LabelFor(model => model.ZipCode)
-    @Html.TextBoxFor(model => model.ZipCode)
+    @Html.TextBoxFor(model => model.ZipCode, new { @class = "form" })
+    <br>
     <input type="submit" value="Add new trader" />
 }
