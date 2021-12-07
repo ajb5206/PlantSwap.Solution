@@ -22,6 +22,8 @@ else
   <ul>
   @foreach(var join in Model.OfferJoinEntity)
   {
+   @* <li>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</li> *@
+   <li>@Html.ActionLink("This plant", "Details", "Plants", new { id = @join.WillAcceptPlantId })</li>
     <h5>In exchange for: the plant with ID #@join.WillAcceptPlantId.</h5>
     <p>From: @join.Trader.TraderHandle</p>
 
@@ -54,26 +56,24 @@ else
 else
 {
   <h4>Requests for @Html.DisplayFor(model => model.CommonName):</h4>
-  <ul>
+
   @foreach(var join in Model.RequestJoinEntity)
   {
-    <h5>In exchange for: the plant with ID #@join.HaveToOfferPlantId.</h5>
-    <li>From: @join.Trader.TraderHandle</li>
-
+    <h5>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId })</h5>
+    <p>From: @Html.ActionLink($"{@join.Trader.TraderHandle}", "Details", "Traders", new { id = @join.Trader.TraderId })</p>
     if(@join.IsCutting == true)
     {
-      <p>This offer is a cutting</p>
+      <p>This plant is a cutting</p>
     }
 
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum miles for this offer: @join.MaxDistance</p>
+    <p>Maximum distance: @join.MaxDistance miles from zip code @join.Trader.ZipCode</p>
     @using (Html.BeginForm("DeleteRequest", "Plants"))
     {
       @Html.Hidden("joinId", @join.RequestId)
       <input type="submit" value="Delete"/>
     }
   }
-  </ul>
 }
 
 <p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.PlantId })</p>
