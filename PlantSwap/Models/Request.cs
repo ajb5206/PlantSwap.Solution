@@ -10,6 +10,7 @@ namespace PlantSwap.Models
         public int PlantId { get; set; }
         public DateTime ListingDate { get; set; }
         public int HaveToOfferPlantId { get; set; }
+        public string HaveToOfferPlantCommonName { get; set; }
         public bool IsCutting { get; set; }
         public int MaxDistance { get; set; }
         public virtual Trader Trader { get; set; }
