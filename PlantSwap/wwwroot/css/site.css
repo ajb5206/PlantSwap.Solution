@@ -70,12 +70,50 @@ html {
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
-  background-image: url(/PlantSwap/wwwroot/images/PlantSwap.jpg);
-  background-repeat:no-repeat;
+  background-image: url(/images/background.png);
+  background-size:40vw;
 }
 
 .form {
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+.label {
+  margin-left: 20px;
+}
+
+.navbar {
+  background-image: url(/images/header.png);
+  background-position: right;
+  position: sticky;
+}
+
+.nav-item {
+  background-color: white;
+  opacity: 0.75;
+}
+h1 {
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+h2 {
+  margin-top: 50px;
+}
+
+h4 {
+   margin-bottom: 20px;
+}
+
+h1, h2, h3, h4, h5, p, li {
+  text-align: center;
+  list-style-position: inside;
+}
+
+.button {
+  margin: 0 auto;
+  display: block;
 }
 
 .footer {
