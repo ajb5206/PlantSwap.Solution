@@ -17,21 +17,23 @@
   @Html.Label("Select trader")
   @Html.DropDownList("traderId", new SelectList(@ViewBag.Traders, "TraderId", "TraderHandle"), new { @class = "form" })
   <br>
-  @Html.Label("Is this a cutting?")
-  @Html.CheckBox("isCutting", false, new { @class = "form" })
-  <br>
+
 	@Html.Label("Listing Date")
 	@Html.TextBox("listingDate", "", new { @class = "form" })
   <br>
+
 	@Html.Label("What plant would you trade for this?")
 	@Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"), new { @class = "form" })
   <br>
-	@Html.Label("Would you accept an imperfect match?")
-	@Html.CheckBox("imperfectMatch", false, new { @class = "form" })
+
+  @Html.Label("Is this a cutting?")
+  @Html.CheckBox("isCutting", false, new { @class = "form" })
   <br>
+
 	@Html.Label("What is the max distance you are willing to travel?")
 	@Html.TextBox("maxDistance", "", new { @class = "form" })
   <br>
+
   <input type="submit" value="Save" />
 } 
 <hr>
