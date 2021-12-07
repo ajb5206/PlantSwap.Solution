@@ -8,15 +8,17 @@
 
 <h2>Log in with your account</h2>
 <hr />
+<div class="form-entry">
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Email)
-  @Html.TextBoxFor(model => model.Email)
+  @Html.TextBoxFor(model => model.Email, new { @class = "form" })
 
-  @Html.LabelFor(Model => Model. Password)
-  @Html.PasswordFor(model => model.Password)
+  @Html.LabelFor(Model => Model. Password, new { @class = "label" })
+  @Html.PasswordFor(model => model.Password, new { @class = "form" })
 
   <input type="submit" value="Log in" class="btn btn-default" />
 }
-
+</div>
+<hr>
 <p>@Html.ActionLink("Register", "Register")</p>

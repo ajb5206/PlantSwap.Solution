@@ -19,7 +19,7 @@
   <br>
 
 	@Html.Label("Listing Date")
-	@Html.TextBox("listingDate")
+	@Html.TextBox("listingDate", "", new { @class = "form" })
   <br>
 
 	@Html.Label("What plant would you trade for this?")
@@ -31,7 +31,7 @@
   <br>
 
 	@Html.Label("What is the max distance you are willing to travel?")
-	@Html.TextBox("maxDistance")
+	@Html.TextBox("maxDistance", "", new { @class = "form" })
   <br>
 
   <input type="submit" value="Save" />
