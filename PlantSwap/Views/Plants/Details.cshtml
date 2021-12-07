@@ -65,10 +65,6 @@ else
       <p>This offer is a cutting</p>
     }
 
-    if(@join.ImperfectMatch == true)
-    {
-      <p>@join.Trader.TraderHandle *will* consider other plants in exchange for the plant with ID #@join.HaveToOfferPlantId</p>
-    }
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum miles for this offer: @join.MaxDistance</p>
     @using (Html.BeginForm("DeleteRequest", "Plants"))
