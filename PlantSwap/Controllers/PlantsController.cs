@@ -7,6 +7,7 @@ using PlantSwap.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PlantSwap.Controllers
 {
@@ -57,12 +58,15 @@ namespace PlantSwap.Controllers
     }
 
     //The id passed into the Details action method comes from the Razor Action Link on line 17 of Views/Plants/Index (or line 25 of Views/Home/Index). That action link is inside a loop through the Index's model so it is only interacting with a single plant at a time (the plant of that iteration). The action link grabs the id from the iteration of the Index's model.
-    public ActionResult Details(int id)
+    public async Task<ActionResult> Details(int id)
     {
       //Gives a list of Plant objects from the plants table of database (but not its associated offers or requests)
-      Plant thisPlant = _db.Plants
+      Plant thisPlant = await _db.Plants.ToListAsync()
+      //Other ideas tried: .AsAsyncEnumberable()
+
+
           //Loads the OfferJoinEntity property of each Plant (this is just a collection of join entities, not the actual Trader or reciprocal plants)
-          .Include(plant => plant.OfferJoinEntity)
+          .Include<Offer>(plant => plant.OfferJoinEntity)
           //Loads the Trader (not just the ID but the actual Trader object) of each OfferJoinEntity
           .ThenInclude(join => join.Trader)
           //Loads the RequestJoinEntity property of each Plant (this is just a collection of join entities, not the actual Trader or reciprocal plants)
@@ -75,7 +79,7 @@ namespace PlantSwap.Controllers
       //Gives a list of Offer objects from the Offers table of the database
       var AcceptablePlantList = _db.Offers
       //Narrows the list to only the offers that have the property PlantId that is equal to the value of the PlantId of thisPlant (the plant whose details we are displaying as selected in lines 63-73)
-        .Include(offer => offer.PlantId == thisPlant.PlantId);
+        .Where(offer => offer.PlantId == thisPlant.PlantId);
 
       //Creates a new empty dictionary
       Dictionary<int, Object> AcceptablePlants = new Dictionary<int, Object> {};
