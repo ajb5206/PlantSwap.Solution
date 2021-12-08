@@ -12,14 +12,13 @@
 <h5>@Html.DisplayNameFor(model => model.Variety): @Html.DisplayFor(model => model.Variety)</h5>
 <hr />
 
+<h1>Offers</h1>
 @if(@Model.OfferJoinEntity.Count == 0)
 {
-  <h4>No offers of @Html.DisplayFor(model => model.CommonName) are currently available.</h4>
+  <h5>No offers of @Html.DisplayFor(model => model.CommonName) are currently available.</h5>
 }
 else
 {
-  <h1>Offers</h1>
-
   @foreach(var join in Model.OfferJoinEntity)
   {
     <h5>In exchange for: @Html.ActionLink($"{@join.WillAcceptPlantCommonName}", "Details", "Plants", new { id = @join.WillAcceptPlantId })</h5>
@@ -47,14 +46,13 @@ else
 }
 <hr />
 
+<h1>Requests</h1>
 @if(@Model.RequestJoinEntity.Count == 0)
 {
-  <h4>No requests are currently made for @Html.DisplayFor(model => model.CommonName).</h4>
+  <h5>No requests are currently made for @Html.DisplayFor(model => model.CommonName).</h5>
 }
 else
 {
-  <h1>Requests</h1>
-
   @foreach(var join in Model.RequestJoinEntity)
   {
     <h5>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId })</h5>

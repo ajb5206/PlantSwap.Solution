@@ -12,14 +12,13 @@
 <h5>@Html.DisplayNameFor(model => model.ZipCode): @Html.DisplayFor(model => model.ZipCode)</h5>
 <hr />
 
+<h1>Offers</h1>
 @if(@Model.OfferJoinEntity.Count == 0)
 {
-  <h4>@Html.DisplayFor(model => model.TraderHandle) has not currently made any offers.</h4>
+  <h5>@Html.DisplayFor(model => model.TraderHandle) has not currently made any offers.</h5>
 }
 else
 {
-  <h1>Offers</h1>
- 
   @foreach(var join in Model.OfferJoinEntity)
   {
     <h5>Offering: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
@@ -47,14 +46,13 @@ else
 }
 <hr />
 
+<h1>Requests</h1>
 @if(@Model.RequestJoinEntity.Count == 0)
 {
-  <h4>@Html.DisplayFor(model => model.TraderHandle) has not made any requests.</h4>
+  <h5>@Html.DisplayFor(model => model.TraderHandle) has not made any requests.</h5>
 }
 else
 {
-  <h1>Requests</h1>
-
   @foreach(var join in Model.RequestJoinEntity)
   {
     <h5>Requested: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
