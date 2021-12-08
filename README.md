@@ -9,9 +9,10 @@
 1. [Technologies Used](#technologies)
 2. [Description](#description)
 3. [Setup/Installation Requirements](#setup)
-4. [Known Bugs](#bugs)
-5. [License](#license)
-6. [Contact Information](#contact)
+4. [Future Strecht Goals](#goals)
+5. [Known Bugs](#bugs)
+6. [License](#license)
+7. [Contact Information](#contact)
 
 ## Technologies Used <a id="technologies"></a>
 
@@ -28,7 +29,7 @@
 
 ## Description <a id="description"></a>
 
-Plant Swap allows users to create an account and then list plants they have available for trading as well as the plants they would be willing to accept in exchange. The user is able to limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API). 
+The web-base Plant Swap application allows registered users to post offers of and requests for plants to trade plants as well as see matching offers and requests from other traders. Users first create an account, log in and then create a trader profile. Once logged in users may view the plant database and as well as other traders profiles. Upon creating their own trader profile, users may list their own offers and requests as well as exploring their matches. 
 
 Data is stored in a SQL database and users are authenticated with Identity.
 
@@ -61,6 +62,12 @@ Data is stored in a SQL database and users are authenticated with Identity.
 
 ### Run the project
 * Run the program in the console with the command `$ dotnet run`
+
+## Future Stretch Goals <a id="goals"></a>
+
+* 
+* The user is able to not just list, but actually limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API and then a database search). 
+
 
 ## Known Bugs <a id="bugs"></a>
 * No known bugs
