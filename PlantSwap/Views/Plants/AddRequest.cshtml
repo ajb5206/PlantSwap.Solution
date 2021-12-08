@@ -26,7 +26,7 @@
 	@Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"), new { @class = "form" })
   <br>
 
-	@Html.Label("What plant would you trade for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
+	@Html.Label("", "What plant would you trade for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
 	@Html.DropDownList("exchangeCommonName", new SelectList(@ViewBag.Plants, "CommonName", "CommonName"), new { @class = "form" })
   <br>
 
