@@ -36,7 +36,7 @@ namespace PlantSwap.Controllers
       IdentityResult result = await _userManager.CreateAsync(user, model.Password);
       if (result.Succeeded)
       {
-        return RedirectToAction("Index");
+        return RedirectToAction("Login");
       }
       else
       {
@@ -74,7 +74,7 @@ namespace PlantSwap.Controllers
     public async Task<ActionResult> LogOff()
     {
       await _signInManager.SignOutAsync();
-      return RedirectToAction("Index");
+      return View("Index", "Home");
     }
   }
 }
