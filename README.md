@@ -29,7 +29,7 @@
 
 ## Description <a id="description"></a>
 
-The web-base Plant Swap application allows registered users to post offers of and requests for plants to trade as well as see matching offers and requests from other traders. Users first create an account, log in and then create a trader profile. Once logged in users may view the plant database and as well as other traders profiles. Upon creating their own trader profile, users may list their own offers and requests as well as exploring their matches. 
+The web-base Plant Swap application allows registered Users to post offers of and requests for plants to trade as well as see matching offers and requests from other Users. Users first create an account, log in and then create a Trader profile. Once logged in, Users may view the plant database and as well as other Traders profiles. Upon creating their own Trader profile, Users may list their own offers and requests as well as exploring their matches and adding plants to the database. Upon finding compatible offers or requests, the User contacts the other trader off the app.
 
 Data is stored in a SQL database and users are authenticated with Identity.
 
