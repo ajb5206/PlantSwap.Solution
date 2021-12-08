@@ -21,14 +21,14 @@ else
 {
   @foreach(var join in Model.OfferJoinEntity)
   {
-    <h5>Offering: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
+    <h5>Offering: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId }, new { @class = "link" })</h5>
 
     if(@join.IsCutting == true)
     {
       <p>This offer is a cutting</p>
     }
     
-    <p>Will except in exchange: @Html.ActionLink($"{@join.WillAcceptPlantCommonName}", "Details", "Plants", new { id = @join.WillAcceptPlantId })</p>
+    <p>Will except in exchange: @Html.ActionLink($"{@join.WillAcceptPlantCommonName}", "Details", "Plants", new { id = @join.WillAcceptPlantId }, new { @class = "link" })</p>
 
     if(@join.ImperfectMatch == true)
     {
@@ -55,8 +55,8 @@ else
 {
   @foreach(var join in Model.RequestJoinEntity)
   {
-    <h5>Requested: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
-    <p>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId })</p>
+    <h5>Requested: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId }, new { @class = "link" })</h5>
+    <p>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId }, new { @class = "link" })</p>
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum distance: @join.MaxDistance from zip code @join.Trader.ZipCode</p>
     
@@ -69,7 +69,7 @@ else
 }
 
 <hr />
-<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.TraderId })</p>
-<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.TraderId })</p>
-<p>@Html.ActionLink("Edit Trader", "Edit", new { id = Model.TraderId })</p>
-<p>@Html.ActionLink("Delete Trader", "Delete", new { id = Model.TraderId })</p>
+<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.TraderId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.TraderId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Edit Trader", "Edit", new { id = Model.TraderId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Delete Trader", "Delete", new { id = Model.TraderId }, new { @class = "link" })</p>

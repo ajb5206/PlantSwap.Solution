@@ -27,6 +27,16 @@ a {
   margin-left: 12px;
 }
 
+.form-entry {
+  text-align: center;
+}
+
+.link {
+  color: green;
+  background-color: transparent;
+  text-decoration: none;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;

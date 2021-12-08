@@ -28,7 +28,7 @@ else
 {
   @foreach (Plant plant in @Model["Plants"])
     {
-      <p>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</p>
+      <p>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId }, new { @class = "link" })</p>
     }
 
 }
