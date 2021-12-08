@@ -30,7 +30,7 @@
 	@Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"), new { @class = "form" })
   <br>
 
-	@Html.Label("Which plant will you accept for this?")
+	@Html.Label("Which plant will you accept for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
 	@Html.DropDownList("exchangeCommonName", new SelectList(@ViewBag.Plants, "CommonName", "CommonName"), new { @class = "form" })
   <br>
 
@@ -38,7 +38,7 @@
 	@Html.CheckBox("imperfectMatch", false, new { @class = "form" })
   <br>
 
-	@Html.Label("What is the max distance you are willing to travel?")
+	@Html.Label("What is the max distance you are willing to travel to complete this trade?")
 	@Html.TextBox("maxDistance", "", new { @class = "form" })
   <br>
 
