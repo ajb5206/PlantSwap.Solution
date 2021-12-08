@@ -14,7 +14,7 @@
 
 @foreach (Plant plant in Model)
 {
-  <li>@Html.ActionLink($"{plant.CommonName}", "Details", new { id = plant.PlantId })</li>
+  <p>@Html.ActionLink($"{plant.CommonName}", "Details", new { id = plant.PlantId })</p>
 }
 <hr>
 <p>@Html.ActionLink("Add new plant", "Create")</p>
