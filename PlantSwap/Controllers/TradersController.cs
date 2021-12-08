@@ -96,7 +96,7 @@ namespace PlantSwap.Controllers
     }
 
     [HttpPost]
-    public ActionResult AddOffer(Trader trader, int plantOfferedId, bool isCutting, DateTime listingDate, int exchangeId, bool imperfectMatch, int maxDistance)
+    public ActionResult AddOffer(Trader trader, int plantOfferedId, bool isCutting, DateTime listingDate, int exchangeId, string exchangeCommonName, bool imperfectMatch, int maxDistance)
     {
       if (plantOfferedId != 0)
       {
@@ -117,7 +117,7 @@ namespace PlantSwap.Controllers
         }
         if (isUnique)
         {
-          _db.Offers.Add(new Offer() { PlantId = plantOfferedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = exchangeId, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
+          _db.Offers.Add(new Offer() { PlantId = plantOfferedId, TraderId = trader.TraderId, IsCutting = isCutting, ListingDate = listingDate, WillAcceptPlantId = exchangeId, WillAcceptPlantCommonName = exchangeCommonName, ImperfectMatch = imperfectMatch, MaxDistance = maxDistance });
         }
         _db.SaveChanges();
       }
