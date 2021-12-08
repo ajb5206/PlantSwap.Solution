@@ -5,7 +5,8 @@
 @using PlantSwap.Models;
 @model List<PlantSwap.Models.Plant>;
 
-<h1>Plants</h1>
+<h1>The Plants</h1>
+<hr />
 
 @if (@Model.Count == 0)
 {
@@ -14,7 +15,5 @@
 
 @foreach (Plant plant in Model)
 {
-  <li>@Html.ActionLink($"{plant.CommonName}", "Details", new { id = plant.PlantId })</li>
+  <p>@Html.ActionLink($"{plant.CommonName}", "Details", new { id = plant.PlantId }, new { @class = "link" })</p>
 }
-<hr>
-<p>@Html.ActionLink("Add new plant", "Create")</p>

@@ -5,7 +5,9 @@
 @using PlantSwap.Models;
 @model List<PlantSwap.Models.Trader>;
 
-<h1>Traders</h1>
+<h1>The Traders</h1>
+<hr />
+
 
 @if (@Model.Count == 0)
 {
@@ -14,7 +16,5 @@
 
 @foreach (Trader trader in Model)
 {
-  <li>@Html.ActionLink($"{trader.TraderHandle}", "Details", new { id = trader.TraderId })</li>
+  <p>@Html.ActionLink($"{trader.TraderHandle}", "Details", new { id = trader.TraderId }, new { @class = "link" })</p>
 }
-<hr>
-<p>@Html.ActionLink("Add new trader", "Create")</p>

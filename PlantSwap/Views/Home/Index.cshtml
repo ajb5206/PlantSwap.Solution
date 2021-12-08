@@ -11,7 +11,7 @@
 
 <hr />
 <div class="home-background">
-<h3>The Plants!</h3>
+<h2>The Plants</h2>
 
 @if (@Model["Plants"].Count == 0)
 {
@@ -19,11 +19,10 @@
 } 
 else
 {
-  <ul>
-    @foreach (Plant plant in @Model["Plants"])
-      {
-        <li>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</li>
-      }
-  </ul>  
+  @foreach (Plant plant in @Model["Plants"])
+    {
+      <p>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId }, new { @class = "link" })</p>
+    }
+
 }
 </div>

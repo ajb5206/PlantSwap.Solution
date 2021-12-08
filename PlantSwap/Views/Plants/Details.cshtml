@@ -4,31 +4,31 @@
 
 @model PlantSwap.Models.Plant;
 
-<h2>Plant Details</h2>
+<h1>@Html.DisplayFor(model => model.CommonName)</h2>
 <hr />
-<h4>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h4>
-<h4>@Html.DisplayNameFor(model => model.Genus): @Html.DisplayFor(model => model.Genus)</h4>
-<h4>@Html.DisplayNameFor(model => model.Species): @Html.DisplayFor(model => model.Species)</h4>
-<h4>@Html.DisplayNameFor(model => model.Variety): @Html.DisplayFor(model => model.Variety)</h4>
+<h5>@Html.DisplayNameFor(model => model.CommonName): @Html.DisplayFor(model => model.CommonName)</h5>
+<h5>@Html.DisplayNameFor(model => model.Genus): @Html.DisplayFor(model => model.Genus)</h5>
+<h5>@Html.DisplayNameFor(model => model.Species): @Html.DisplayFor(model => model.Species)</h5>
+<h5>@Html.DisplayNameFor(model => model.Variety): @Html.DisplayFor(model => model.Variety)</h5>
 <hr />
 
+<h1>Offers</h1>
 @if(@Model.OfferJoinEntity.Count == 0)
 {
-  <h4>No offers of @Html.DisplayFor(model => model.CommonName) are currently available.</h4>
+  <h5>No offers of @Html.DisplayFor(model => model.CommonName) are currently available.</h5>
 }
 else
 {
-  <h4>Offers available for @Html.DisplayFor(model => model.CommonName)</h4>
-  <ul>
   @foreach(var join in Model.OfferJoinEntity)
   {
-    <h5>In exchange for: the plant with ID #@join.WillAcceptPlantId.</h5>
-    <p>From: @join.Trader.TraderHandle</p>
+    <h5>In exchange for: @Html.ActionLink($"{@join.WillAcceptPlantCommonName}", "Details", "Plants", new { id = @join.WillAcceptPlantId }, new { @class = "link" })</h5>
 
     if(@join.IsCutting == true)
     {
       <p>This offer is a cutting</p>
     }
+
+    <p>From: @Html.ActionLink($"{@join.Trader.TraderHandle}", "Details", "Traders", new { id = @join.Trader.TraderId }, new { @class = "link" })</p>
 
     if(@join.ImperfectMatch == true)
     {
@@ -36,48 +36,46 @@ else
     }
 
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum miles for this offer: @join.MaxDistance</p>
+    <p>Maximum distance: @join.MaxDistance miles from zip code @join.Trader.ZipCode</p>
     @using (Html.BeginForm("DeleteOffer", "Plants"))
     {
       @Html.Hidden("joinId", @join.OfferId)
       <input type="submit" class="button" value="Delete"/>
     }
   }
-  </ul>
 }
 <hr />
 
+<h1>Requests</h1>
 @if(@Model.RequestJoinEntity.Count == 0)
 {
-  <h4>No requests are currently made for @Html.DisplayFor(model => model.CommonName).</h4>
+  <h5>No requests are currently made for @Html.DisplayFor(model => model.CommonName).</h5>
 }
 else
 {
-  <h4>Requests for @Html.DisplayFor(model => model.CommonName):</h4>
-  <ul>
   @foreach(var join in Model.RequestJoinEntity)
   {
-    <h5>In exchange for: the plant with ID #@join.HaveToOfferPlantId.</h5>
-    <li>From: @join.Trader.TraderHandle</li>
-
+    <h5>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId }, new { @class = "link" })</h5>
+    <p>From: @Html.ActionLink($"{@join.Trader.TraderHandle}", "Details", "Traders", new { id = @join.Trader.TraderId }, new { @class = "link" })</p>
+    
     if(@join.IsCutting == true)
     {
-      <p>This offer is a cutting</p>
+      <p>This plant is a cutting</p>
     }
 
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum miles for this offer: @join.MaxDistance</p>
+    <p>Maximum distance: @join.MaxDistance miles from zip code @join.Trader.ZipCode</p>
+    
     @using (Html.BeginForm("DeleteRequest", "Plants"))
     {
       @Html.Hidden("joinId", @join.RequestId)
-      <input type="submit" value="Delete"/>
+      <input type="submit" class="button" value="Delete"/>
     }
   }
-  </ul>
 }
 
-<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.PlantId })</p>
-<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.PlantId })</p>
-<p>@Html.ActionLink("Edit Plant", "Edit", new { id = Model.PlantId })</p>
-<p>@Html.ActionLink("Delete Plant", "Delete", new { id = Model.PlantId })</p>
-<p>@Html.ActionLink("Back to Plants", "Index")</p>
+<hr />
+<p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.PlantId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.PlantId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Edit Plant", "Edit", new { id = Model.PlantId }, new { @class = "link" })</p>
+<p>@Html.ActionLink("Delete Plant", "Delete", new { id = Model.PlantId }, new { @class = "link" })</p>

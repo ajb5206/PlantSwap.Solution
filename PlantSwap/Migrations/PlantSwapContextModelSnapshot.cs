@@ -233,6 +233,9 @@ namespace PlantSwap.Migrations
                     b.Property<int>("TraderId")
                         .HasColumnType("int");
 
+                    b.Property<string>("WillAcceptPlantCommonName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("WillAcceptPlantId")
                         .HasColumnType("int");
 
@@ -274,6 +277,9 @@ namespace PlantSwap.Migrations
                     b.Property<int>("RequestId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("HaveToOfferPlantCommonName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.Property<int>("HaveToOfferPlantId")
                         .HasColumnType("int");

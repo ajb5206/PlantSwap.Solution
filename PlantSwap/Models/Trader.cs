@@ -15,16 +15,16 @@ namespace PlantSwap.Models
       public int TraderId { get; set; }
       [Required]
 
-      [DisplayName("Trader's Handle")]
+      [DisplayName("Handle")]
       public string TraderHandle { get; set; }
       [Required]
-      [DisplayName("Trader's Name")]
+      [DisplayName("Name")]
       public string TraderName { get; set; }
       [Required]
-      [DisplayName("Trader's preferred contact information (e.g. Phone number or email address)")]
+      [DisplayName("Preferred contact information")]
       public string PreferredContact { get; set; }
       [Required]
-      [DisplayName("Trader's Zip Code")]
+      [DisplayName("Zip Code")]
       public int ZipCode { get; set; }
       
       public virtual ICollection<Request> RequestJoinEntity { get; set; }
