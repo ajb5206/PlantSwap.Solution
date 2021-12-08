@@ -4,9 +4,7 @@
 
 @model PlantSwap.Models.Trader
 
-<h2>Add an offer</h2>
-
-<h4>Add an offer from @Html.DisplayFor(model => model.TraderHandle)</h4>
+<h2>Add an offer from @Html.DisplayFor(model => model.TraderHandle)</h2>
 
 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
@@ -31,7 +29,7 @@
     @Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"), new { @class = "form" })
     <br>
 
-    @Html.Label("What plant will you accept for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
+    @Html.Label("", "What plant will you accept for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
     @Html.DropDownList("exchangeCommonName", new SelectList(@ViewBag.Plants, "CommonName", "CommonName"), new { @class = "form" })
     <br>
 
@@ -39,7 +37,7 @@
     @Html.CheckBox("imperfectMatch", false, new { @class = "form" })
     <br>
 
-    @Html.Label("What is the max distance you are willing to travel to complete this trade?")
+    @Html.Label("What is the maximum distance in miles you are willing to travel to complete this trade?")
     @Html.TextBox("maxDistance", "", new { @class = "form" })
     <br>
     <input type="submit" class="button" value="Save" />

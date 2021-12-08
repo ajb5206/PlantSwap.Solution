@@ -58,7 +58,7 @@ else
     <h5>Requested: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId }, new { @class = "link" })</h5>
     <p>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId }, new { @class = "link" })</p>
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    <p>Maximum distance: @join.MaxDistance from zip code @join.Trader.ZipCode</p>
     
     @using (Html.BeginForm("DeleteRequest", "Traders"))
     {

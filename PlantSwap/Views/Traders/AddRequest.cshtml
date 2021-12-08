@@ -4,9 +4,7 @@
 
 @model PlantSwap.Models.Trader
 
-<h2>Add a request</h2>
-
-<h4>Add a request from @Html.DisplayFor(model => model.TraderHandle)</h4>
+<h2>Add a request from @Html.DisplayFor(model => model.TraderHandle)</h2>
 
 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
 
@@ -25,6 +23,11 @@
 
     @Html.Label("What plant would you trade for this?")
     @Html.DropDownList("exchangeId", new SelectList(@ViewBag.Plants, "PlantId", "CommonName"), new { @class = "form" })
+    <br>
+
+
+    @Html.Label("", "What plant would you trade for this? We know it's goofy but please enter it again. Be sure to select the same plant.")
+    @Html.DropDownList("exchangeCommonName", new SelectList(@ViewBag.Plants, "CommonName", "CommonName"), new { @class = "form" })
     <br>
 
     @Html.Label("Is this a cutting?")

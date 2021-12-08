@@ -11,14 +11,12 @@
 <div class="form-entry">
 @using (Html.BeginForm())
 {
-  @Html.LabelFor(model => model.Email)
+  @Html.Label("User Name")
   @Html.TextBoxFor(model => model.Email, new { @class = "form" })
 
   @Html.LabelFor(Model => Model. Password, new { @class = "label" })
   @Html.PasswordFor(model => model.Password, new { @class = "form" })
 
-  <input type="submit" value="Log in" class="btn btn-default" />
+  <input type="submit" value="Log in" class="button" />
 }
 </div>
-<hr>
-<p>@Html.ActionLink("Register", "Register", "", new{ @class = "link" }, new { @class = "link" })</p>
