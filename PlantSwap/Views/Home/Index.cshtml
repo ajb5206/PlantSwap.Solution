@@ -19,11 +19,10 @@
 } 
 else
 {
-  <ul>
-    @foreach (Plant plant in @Model["Plants"])
-      {
-        <li>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</li>
-      }
-  </ul>  
+  @foreach (Plant plant in @Model["Plants"])
+    {
+      <p>@Html.ActionLink($"{plant.CommonName}", "Details", "Plants", new { id = plant.PlantId })</p>
+    }
+
 }
 </div>
