@@ -1,17 +1,23 @@
 # Plant Swap
 
-#### _A web-based application allowing registered users to list plants they have available for trade as well as specify the plants they're willing to receive in return, using Entity to manage a many-to-many relationship in an SQL database and Identity to manage user Authentication._
+#### _A web-based MVP application allowing registered users to trade plants by posting offers and requests as well as see matching offers and requests from other traders. Entity is used to manage a many-to-many relationship in an SQL database and Identity is used to manage user Authentication._
 
 #### By **Alex Bertotto, Shane Graff, Tim Roth and Jessica R. Williams**
 
 ## Table of Contents
 
-1. [Technologies Used](#technologies)
-2. [Description](#description)
-3. [Setup/Installation Requirements](#setup)
-4. [Known Bugs](#bugs)
-5. [License](#license)
-6. [Contact Information](#contact)
+1. [Preview](#preview)
+2. [Technologies Used](#technologies)
+3. [Description](#description)
+4. [Setup/Installation Requirements](#setup)
+5. [Future Stretch Goals](#goals)
+6. [Known Bugs](#bugs)
+7. [License](#license)
+8. [Contact Information](#contact)
+
+## Preview <a id="preview"></a>
+
+<img src="./plant_details_view.png" alt="Screenshot of the details view of single plant from the apps database." width="60%">
 
 ## Technologies Used <a id="technologies"></a>
 
@@ -24,13 +30,11 @@
 * _Microsoft.EntityFrameworkCore.Design 5.0.0_
 * _Microsoft.NET.Sdk.Web_
 * _Microsoft.NET.Test.Sdk 15.0.0_
-* _MSTest.TestAdapter 1.3.2_
-* _MSTest.TestFramework 1.3.2_
 * _Pomelo.EntityFrameworkCore.MySql 5.0.0-alpha.2_
 
 ## Description <a id="description"></a>
 
-Plant Swap allows users to create an account and then list plants they have available for trading as well as the plants they would be willing to accept in exchange. The user is able to limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API). 
+The web-base Plant Swap Minimum Viable Product (MVP) application allows registered Users to post offers of and requests for plants to trade as well as see matching offers and requests from other Users. Users first create an account, log in and then create a Trader profile. Once logged in, Users may view the plant database and as well as other Traders profiles. Upon creating their own Trader profile, Users may list their own offers and requests as well as exploring their matches and adding plants to the database. Upon finding compatible offers or requests, the User contacts the other trader off the app.
 
 Data is stored in a SQL database and users are authenticated with Identity.
 
@@ -63,6 +67,18 @@ Data is stored in a SQL database and users are authenticated with Identity.
 
 ### Run the project
 * Run the program in the console with the command `$ dotnet run`
+
+## Future Stretch Goals <a id="goals"></a>
+
+* Add user authorization!
+
+* Figure out how to link an IdentityUser and a Trader such that the app automatically grabs logged in IdentityUser’s UserName and assign it to the TraderHandle as well as limits each IdentityUser to being able to create a single Trader. A further stretch in this vein would be to automatically create a trader when an IdentityUser is created and then prompt the IdentityUser to fill in trader details upon first login.
+
+* The user is able to not just list, but actually limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API and then a database search).
+
+* Allow the users to add images
+
+* Add a search/match View and route
 
 ## Known Bugs <a id="bugs"></a>
 * No known bugs
