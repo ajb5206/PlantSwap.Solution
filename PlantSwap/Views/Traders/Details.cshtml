@@ -4,62 +4,74 @@
 
 @model PlantSwap.Models.Trader;
 
-<h2>Trader Details</h2>
+<h1>@Html.DisplayFor(model => model.TraderHandle)</h1>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.TraderHandle): @Html.DisplayFor(model => model.TraderHandle)</h3>
-<h3>@Html.DisplayNameFor(model => model.TraderName): @Html.DisplayFor(model => model.TraderName)</h3>
-<h3>@Html.DisplayNameFor(model => model.PreferredContact): @Html.DisplayFor(model => model.PreferredContact)</h3>
-<h3>@Html.DisplayNameFor(model => model.ZipCode): @Html.DisplayFor(model => model.ZipCode)</h3>
-
+<h5>@Html.DisplayNameFor(model => model.TraderHandle): @Html.DisplayFor(model => model.TraderHandle)</h5>
+<h5>@Html.DisplayNameFor(model => model.TraderName): @Html.DisplayFor(model => model.TraderName)</h5>
+<h5>@Html.DisplayNameFor(model => model.PreferredContact): @Html.DisplayFor(model => model.PreferredContact)</h5>
+<h5>@Html.DisplayNameFor(model => model.ZipCode): @Html.DisplayFor(model => model.ZipCode)</h5>
+<hr />
 
 @if(@Model.OfferJoinEntity.Count == 0)
 {
-  <p>This trader has not currently made any offers.</p>
+  <h4>@Html.DisplayFor(model => model.TraderHandle) has not currently made any offers.</h4>
 }
 else
 {
-  <h4>Offers this trader has made:</h4>
-  <ul>
+  <h1>Offers</h1>
+ 
   @foreach(var join in Model.OfferJoinEntity)
   {
-    <li>@join.Plant.CommonName</li>
-//Need conditional if Cutting, ImperfectMatch are true
+    <h5>Offering: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
+
+    if(@join.IsCutting == true)
+    {
+      <p>This offer is a cutting</p>
+    }
+    
+    <p>Will except in exchange: @Html.ActionLink($"{@join.WillAcceptPlantCommonName}", "Details", "Plants", new { id = @join.WillAcceptPlantId })</p>
+
+    if(@join.ImperfectMatch == true)
+    {
+      <p>@join.Trader.TraderHandle *will* consider other plants in exchange for their @join.Plant.CommonName</p>
+    }
+
     <p>Listing date: @join.ListingDate</p>
-    <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    <p>Maximum distance: @join.MaxDistance miles from zip code @Model.ZipCode</p>
     @using (Html.BeginForm("DeleteOffer", "Traders"))
     {
       @Html.Hidden("joinId", @join.OfferId)
-      <input type="submit" value="Delete"/>
+      <input type="submit" class="button" value="Delete"/>
     }
   }
-  </ul>
 }
+<hr />
 
 @if(@Model.RequestJoinEntity.Count == 0)
 {
-  <p>This trader has not made any requests.</p>
+  <h4>@Html.DisplayFor(model => model.TraderHandle) has not made any requests.</h4>
 }
 else
 {
-  <h4>Requests this trader has made:</h4>
-  <ul>
+  <h1>Requests</h1>
+
   @foreach(var join in Model.RequestJoinEntity)
   {
-    <li>@join.Plant.CommonName</li>
-//Need conditional if Cutting, ImperfectMatch are true
+    <h5>Requested: @Html.ActionLink($"{@join.Plant.CommonName}", "Details", "Plants", new { id = @join.Plant.PlantId })</h5>
+    <p>In exchange for: @Html.ActionLink($"{@join.HaveToOfferPlantCommonName}", "Details", "Plants", new { id = @join.HaveToOfferPlantId })</p>
     <p>Listing date: @join.ListingDate</p>
     <p>Maximum distance in miles for trading: @join.MaxDistance</p>
+    
     @using (Html.BeginForm("DeleteRequest", "Traders"))
     {
       @Html.Hidden("joinId", @join.RequestId)
-      <input type="submit" value="Delete"/>
+      <input type="submit" class="button" value="Delete"/>
     }
   }
-  </ul>
 }
 
+<hr />
 <p>@Html.ActionLink("Add an Offer", "AddOffer", new { id = Model.TraderId })</p>
 <p>@Html.ActionLink("Add a Request", "AddRequest", new { id = Model.TraderId })</p>
 <p>@Html.ActionLink("Edit Trader", "Edit", new { id = Model.TraderId })</p>
 <p>@Html.ActionLink("Delete Trader", "Delete", new { id = Model.TraderId })</p>
-<p>@Html.ActionLink("Back to Traders", "Index")</p>
