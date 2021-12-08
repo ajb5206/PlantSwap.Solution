@@ -16,5 +16,5 @@
 
 @foreach (Trader trader in Model)
 {
-  <p>@Html.ActionLink($"{trader.TraderHandle}", "Details", new { id = trader.TraderId })</p>
+  <p>@Html.ActionLink($"{trader.TraderHandle}", "Details", new { id = trader.TraderId }, new { @class = "link" })</p>
 }

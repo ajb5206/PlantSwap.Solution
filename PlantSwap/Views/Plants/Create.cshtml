@@ -7,20 +7,21 @@
 <h4>Add a new plant</h4>
 
 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
+<div class="form-entry">
 @using (Html.BeginForm())
 {
     @Html.LabelFor(model => model.Genus)
-    @Html.TextBoxFor(model => model.Genus)
+    @Html.TextBoxFor(model => model.Genus, new { @class = "form" })
     <br>
     @Html.LabelFor(model => model.Species)
-    @Html.TextBoxFor(model => model.Species)
+    @Html.TextBoxFor(model => model.Species, new { @class = "form" })
     <p><i>Common Name is required</i></p>
     @Html.LabelFor(model => model.CommonName)
-    @Html.TextBoxFor(model => model.CommonName)
+    @Html.TextBoxFor(model => model.CommonName, new { @class = "form" })
     <br>
     @Html.LabelFor(model => model.Variety)
-    @Html.TextBoxFor(model => model.Variety)
+    @Html.TextBoxFor(model => model.Variety, new { @class = "form" })
     <br>
-    <input type="submit" value="Add new plant" />
+    <input type="submit" class="button" value="Add new plant" />
 }
+</div>
