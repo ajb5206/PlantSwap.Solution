@@ -6,6 +6,7 @@
 @model List<PlantSwap.Models.Plant>;
 
 <h1>The Plants</h1>
+<hr />
 
 @if (@Model.Count == 0)
 {
@@ -16,5 +17,3 @@
 {
   <p>@Html.ActionLink($"{plant.CommonName}", "Details", new { id = plant.PlantId })</p>
 }
-<hr>
-<p>@Html.ActionLink("Add new plant", "Create")</p>
