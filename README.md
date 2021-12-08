@@ -1,6 +1,6 @@
 # Plant Swap
 
-#### _A web-based application allowing registered users to post offers of and requests for plants to trade plants as well as see matching offers and requests from other traders using Entity to manage a many-to-many relationship in an SQL database and Identity to manage user Authentication._
+#### _A web-based application allowing registered users to trade plants by posting offers and requests as well as see matching offers and requests from other traders. Entity is used to manage a many-to-many relationship in an SQL database and Identity is used to manage user Authentication._
 
 #### By **Alex Bertotto, Shane Graff, Tim Roth and Jessica R. Williams**
 
@@ -9,7 +9,7 @@
 1. [Technologies Used](#technologies)
 2. [Description](#description)
 3. [Setup/Installation Requirements](#setup)
-4. [Future Strecht Goals](#goals)
+4. [Future Stretch Goals](#goals)
 5. [Known Bugs](#bugs)
 6. [License](#license)
 7. [Contact Information](#contact)
@@ -29,7 +29,7 @@
 
 ## Description <a id="description"></a>
 
-The web-base Plant Swap application allows registered users to post offers of and requests for plants to trade plants as well as see matching offers and requests from other traders. Users first create an account, log in and then create a trader profile. Once logged in users may view the plant database and as well as other traders profiles. Upon creating their own trader profile, users may list their own offers and requests as well as exploring their matches. 
+The web-base Plant Swap application allows registered users to post offers of and requests for plants to trade as well as see matching offers and requests from other traders. Users first create an account, log in and then create a trader profile. Once logged in users may view the plant database and as well as other traders profiles. Upon creating their own trader profile, users may list their own offers and requests as well as exploring their matches. 
 
 Data is stored in a SQL database and users are authenticated with Identity.
 
@@ -65,9 +65,15 @@ Data is stored in a SQL database and users are authenticated with Identity.
 
 ## Future Stretch Goals <a id="goals"></a>
 
-* 
-* The user is able to not just list, but actually limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API and then a database search). 
+* Add user authorization!
 
+* Figure out how to link an IdentityUser and a Trader such that the app automatically grabs logged in IdentityUser’s UserName and assign it to the TraderHandle as well as limits each IdentityUser to being able to create a single Trader. A further stretch in this vein would be to automatically create a trader when an IdentityUser is created and then prompt the IdentityUser to fill in trader details upon first login.
+
+* The user is able to not just list, but actually limit how far from their zip code they're willing to travel to complete the trade. Plant Swap only match users who have compatible plants (via a database search) and are geographically appropriate (via Google Maps Distance Matrix API and then a database search).
+
+* Allow the users to add images
+
+* Add a search/match View and route
 
 ## Known Bugs <a id="bugs"></a>
 * No known bugs
