@@ -1,6 +1,6 @@
 # Plant Swap
 
-#### _A web-based application allowing registered users to list plants they have available for trade as well as specify the plants they're willing to receive in return, using Entity to manage a many-to-many relationship in an SQL database and Identity to manage user Authentication._
+#### _A web-based application allowing registered users to post offers of and requests for plants to trade plants as well as see matching offers and requests from other traders using Entity to manage a many-to-many relationship in an SQL database and Identity to manage user Authentication._
 
 #### By **Alex Bertotto, Shane Graff, Tim Roth and Jessica R. Williams**
 
@@ -24,8 +24,6 @@
 * _Microsoft.EntityFrameworkCore.Design 5.0.0_
 * _Microsoft.NET.Sdk.Web_
 * _Microsoft.NET.Test.Sdk 15.0.0_
-* _MSTest.TestAdapter 1.3.2_
-* _MSTest.TestFramework 1.3.2_
 * _Pomelo.EntityFrameworkCore.MySql 5.0.0-alpha.2_
 
 ## Description <a id="description"></a>
