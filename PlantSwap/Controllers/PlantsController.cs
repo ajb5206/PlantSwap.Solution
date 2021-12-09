@@ -67,7 +67,6 @@ namespace PlantSwap.Controllers
       return View(thisPlant);
     }
 
-//Add User Authorization
     public ActionResult Edit(int id)
     {
       Plant thisPlant = _db.Plants.FirstOrDefault(plant => plant.PlantId == id);
@@ -179,7 +178,6 @@ namespace PlantSwap.Controllers
       return RedirectToAction("Index");
     }
 
-    //Add User Authorization
     [HttpPost]
     public ActionResult DeleteOffer(int joinId)
     {
