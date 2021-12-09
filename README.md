@@ -9,11 +9,12 @@
 1. [Preview](#preview)
 2. [Technologies Used](#technologies)
 3. [Description](#description)
-4. [Setup/Installation Requirements](#setup)
-5. [Future Stretch Goals](#goals)
-6. [Known Bugs](#bugs)
-7. [License](#license)
-8. [Contact Information](#contact)
+4. [The Database Schema](#schema)
+5. [Setup/Installation Requirements](#setup)
+6. [Future Stretch Goals](#goals)
+7. [Known Bugs](#bugs)
+8. [License](#license)
+9. [Contact Information](#contact)
 
 ## Preview <a id="preview"></a>
 
@@ -37,6 +38,10 @@
 The web-base Plant Swap Minimum Viable Product (MVP) application allows registered Users to post offers of and requests for plants to trade as well as see matching offers and requests from other Users. Users first create an account, log in and then create a Trader profile. Once logged in, Users may view the plant database and as well as other Traders profiles. Upon creating their own Trader profile, Users may list their own offers and requests as well as exploring their matches and adding plants to the database. Upon finding compatible offers or requests, the User contacts the other trader off the app.
 
 Data is stored in a SQL database and users are authenticated with Identity.
+
+## The Database Schema <a id="schema"></a>
+
+<img src="./schema_screenshot.png" alt="Screenshot of the the database scheme with two tables and two join tables." width="60%">
 
 ## Setup/Installation Requirements <a id="setup"></a>
 
