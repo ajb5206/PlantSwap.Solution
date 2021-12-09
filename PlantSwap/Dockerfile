@@ -30,4 +30,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet plant-swap.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet PlantSwap.dll
