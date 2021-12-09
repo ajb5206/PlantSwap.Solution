@@ -67,7 +67,6 @@ namespace PlantSwap.Controllers
       return View(thisTrader);
     }
 
-//Add User Authorization
     public ActionResult Edit(int id)
     {
       Trader thisTrader = _db.Traders.FirstOrDefault(trader => trader.TraderId == id);
@@ -176,7 +175,6 @@ namespace PlantSwap.Controllers
       return RedirectToAction("Index");
     }
 
-    //Add User Authorization
     [HttpPost]
     public ActionResult DeleteOffer(int joinId)
     {
